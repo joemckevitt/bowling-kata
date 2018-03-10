@@ -45,14 +45,23 @@ public class GameTest {
         game.roll(3);//2nd frame total 7
         assertEquals(21, game.score());
     }
-    
-        @Test
-    public void testSpareExample() {
+
+    @Test
+    public void testSpareWithTwoFramesExample() {
         Game game = new Game();
         game.roll(8);
         game.roll(2);//spare
         game.roll(5);//10 + first throw making first frame 5
         game.roll(4);//2nd frame total 9
+        assertEquals(24, game.score());
+    }
+
+    @Test
+    public void testStrikeWithTwoFramesExample() {
+        Game game = new Game();
+        game.roll(10);//strike
+        game.roll(5);
+        game.roll(2);
         assertEquals(24, game.score());
     }
 }
