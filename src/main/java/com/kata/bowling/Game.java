@@ -1,4 +1,4 @@
-package org.eclipse.che.examples;
+package com.kata.bowling;
 
 /**
  * http://kata-log.rocks/bowling-game-kata
@@ -25,13 +25,14 @@ int score() returns the total score for that game.
  */
 
 public class Game {
-    
-    int currentScore = 0;
-    int numberOfThrows = 0;
-    int numberOfFrames = 0;
-    int lastRoll = 0;
-    boolean endOfFrame;
-    boolean spareInLastFrame;
+
+    private int currentScore = 0;
+
+    private int numberOfThrows = 0;
+    private int numberOfFrames = 0;
+    private int lastRoll = 0;
+    private boolean endOfFrame;
+    private boolean spareInLastFrame;
     
     public void roll(int latestThrow)  {
 
