@@ -52,8 +52,8 @@ public class GameTest {
         Game game = new Game();
         game.roll(8);
         game.roll(2);//spare
-        game.roll(5);//10 + first throw making first frame 14
-        game.roll(4);//2nd frame total 7
+        game.roll(5);//10 + first throw making first frame 5
+        game.roll(4);//2nd frame total 9
         assertEquals(24, game.score());
     }
 }
