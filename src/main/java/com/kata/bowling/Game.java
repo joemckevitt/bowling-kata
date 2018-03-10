@@ -24,7 +24,7 @@ void roll(int) is called each time the player rolls a ball. The argument is the 
 int score() returns the total score for that game.
  */
 
-public class Game {
+class Game {
 
     private int currentScore = 0;
 
