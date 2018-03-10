@@ -91,9 +91,4 @@ class Game {
     public int score()  {
         return currentScore;
     }
-    
-    public static void main(String... argvs) {
-        String a = "Bowling game";
-        System.out.println("Hello World " + a + "!");
-    }
 }
