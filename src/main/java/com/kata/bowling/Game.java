@@ -27,11 +27,9 @@ package com.kata.bowling;
 class Game {
 
     private int currentScore = 0;
-
     private int numberOfThrowsPerFrame = 0;
     private int numberOfFrames = 0;
     private int lastRoll = 0;
-    private boolean endOfFrame;
     private boolean spareInLastFrame;
     private boolean strikeInLastFrame;
 
@@ -44,7 +42,6 @@ class Game {
         numberOfThrowsPerFrame++;
 
         if (isEndOfFrame(latestThrow, numberOfThrowsPerFrame)) {
-
             endOfFrameWork(latestThrow);
         } else {
             //cache last throw
@@ -125,7 +122,6 @@ class Game {
     }
 
     private void resetForNextFrame() {
-        endOfFrame = false;
         lastRoll = 0;
         numberOfThrowsPerFrame = 0;
     }
