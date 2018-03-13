@@ -2,14 +2,16 @@ package com.kata.bowling;
 
 public class Frame {
 
-    int frameSequence;
-    int firstThrow;
+    private int frameSequence;
+    private int firstThrow;
     int secondThrow;
     int score;
     public boolean firstThrowTaken;
     public boolean frameOver;
+    private boolean strikeScored;
+    private boolean spareScored;
 
-    public Frame(int frameSequence) {
+    Frame(int frameSequence) {
         this.frameSequence = frameSequence;
         firstThrowTaken = false;
         frameOver = false;
@@ -29,18 +31,28 @@ public class Frame {
 
     public void setSecondThrow(int secondThrow) {
         this.secondThrow = secondThrow;
-        firstThrowTaken = true;
     }
 
     public int getScore() {
-        return score;
+        return firstThrow + secondThrow;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public boolean isStrikeScored() {
+        return strikeScored;
     }
 
-    //TODO update with new fields
+    public void setStrikeScored(boolean strikeScored) {
+        this.strikeScored = strikeScored;
+    }
+
+    public boolean isSpareScored() {
+        return spareScored;
+    }
+
+    public void setSpareScored(boolean spareScored) {
+        this.spareScored = spareScored;
+    }
+
     @Override
     public String toString() {
         return "Frame{" +
@@ -48,6 +60,10 @@ public class Frame {
                 ", firstThrow=" + firstThrow +
                 ", secondThrow=" + secondThrow +
                 ", score=" + score +
+                ", firstThrowTaken=" + firstThrowTaken +
+                ", frameOver=" + frameOver +
+                ", strikeScored=" + strikeScored +
+                ", spareScored=" + spareScored +
                 '}';
     }
 }

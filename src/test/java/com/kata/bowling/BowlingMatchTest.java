@@ -18,14 +18,6 @@ public class BowlingMatchTest {
         bowlingMatch.roll(5);
         assertEquals(0, bowlingMatch.score());
     }
-  
-    @Test
-    public void testTwoThrowsFirstFrame() {
-        BowlingMatch bowlingMatch = new BowlingMatch();
-        bowlingMatch.roll(7);
-        bowlingMatch.roll(1);
-        assertEquals(8, bowlingMatch.score());
-    }
     
     @Test
     public void testTwoThrowsUnderTen() {

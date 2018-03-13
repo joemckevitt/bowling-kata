@@ -27,31 +27,69 @@ public class Game {
     /**
      * adds the latest score to the current frame and updates running total
      *
-     * @param score score of latest throw
+     * @param scoreOfCurrentThrow score of latest throw
      * @return returns true if its the end of frame
      */
-    public boolean roll(int score) {
+    public boolean roll(int scoreOfCurrentThrow) {
         
         //grab the current frame
         Frame frame = frames.get(currentFrameCursor);
         
         //add the score to the frame
         //TODO encapsulate this check inside frame
-        if (frame.firstThrowTaken)   {
-            frame.setFirstThrow(score);
+        if (!frame.firstThrowTaken) {
+            frame.setFirstThrow(scoreOfCurrentThrow);
+            frame.firstThrowTaken = true;
+
+            //detect if its a strike
+            if (scoreOfCurrentThrow == 10) {
+                frame.frameOver = true;
+            }
+
         } else  {
-            frame.setSecondThrow(score);
+            frame.setSecondThrow(scoreOfCurrentThrow);
+            frame.frameOver = true;
         }
         
         //detect if the frame is over (could be on the first throw if its a strike)
         if (frame.frameOver)   {
-            //if so, update the pointer to the next frame and return true
+
+            if (frame.getScore() == 10 && frame.secondThrow == 0) {
+                frame.setStrikeScored(true);
+                score = score + frame.getScore();
+            } else if (frame.getScore() == 10) {
+                frame.setSpareScored(true);
+                score = score + frame.getScore();
+            } else {
+                //check if previous frame was a spare
+                if (currentFrameCursor > 1) {
+                    Frame previousFrame = frames.get(currentFrameCursor - 1);
+                    if (previousFrame.isSpareScored()) {
+                        //last frame scored a spare
+                        //this time hit two throws without a spare (less then 10)
+                        score = score + (2 * frame.getFirstThrow()) + frame.getSecondThrow();
+                    } else if (previousFrame.isStrikeScored()) {
+                        //last frame scored a strike
+                        //this time hit two throws without a spare
+                        score = score + frame.getScore() * 2;
+                    } else {
+                        score = score + frame.getScore();
+                    }
+                } else {
+                    score = score + frame.getScore();
+                }
+            }
+
+            //update the pointer to the next frame and return true
             currentFrameCursor++;
-            score = score + frame.getScore();
             return true;
         } else  {
-            score = score + frame.getScore();
+            //score = score + frame.getScore();
             return false;
         }
+    }
+
+    public int getScore() {
+        return score;
     }
 }
