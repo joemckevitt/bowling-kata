@@ -6,9 +6,13 @@ public class Frame {
     int firstThrow;
     int secondThrow;
     int score;
+    public boolean firstThrowTaken;
+    public boolean frameOver;
 
     public Frame(int frameSequence) {
         this.frameSequence = frameSequence;
+        firstThrowTaken = false;
+        frameOver = false;
     }
 
     public int getFirstThrow() {
@@ -25,6 +29,7 @@ public class Frame {
 
     public void setSecondThrow(int secondThrow) {
         this.secondThrow = secondThrow;
+        firstThrowTaken = true;
     }
 
     public int getScore() {
@@ -35,6 +40,7 @@ public class Frame {
         this.score = score;
     }
 
+    //TODO update with new fields
     @Override
     public String toString() {
         return "Frame{" +
