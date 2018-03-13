@@ -18,13 +18,13 @@ package com.kata.bowling;
  * However no more than three balls can be rolled in tenth frame.
  * <p>
  * Requirements
- * Write a class Game that has two methods
+ * Write a class BowlingMatch that has two methods
  * <p>
  * void roll(int) is called each time the player rolls a ball. The argument is the number of pins knocked down.
  * int score() returns the total score for that game.
  */
 
-class Game {
+class BowlingMatch {
 
     private int currentScore = 0;
     private int numberOfThrowsPerFrame = 0;

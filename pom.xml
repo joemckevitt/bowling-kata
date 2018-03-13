@@ -26,7 +26,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.kata.bowling.Game</mainClass>
+                            <mainClass>com.kata.bowling.BowlingMatch</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
