@@ -4,9 +4,9 @@ public class Frame {
 
     private int frameSequence;
     private int firstThrow;
-    int secondThrow;
-    public boolean firstThrowTaken;
-    public boolean frameOver;
+    private int secondThrow;
+    private boolean firstThrowTaken;
+    private boolean frameOver;
     private boolean strikeScored;
     private boolean spareScored;
 
@@ -50,6 +50,22 @@ public class Frame {
 
     public void setSpareScored(boolean spareScored) {
         this.spareScored = spareScored;
+    }
+
+    public boolean isFirstThrowTaken() {
+        return firstThrowTaken;
+    }
+
+    public void setFirstThrowTaken(boolean firstThrowTaken) {
+        this.firstThrowTaken = firstThrowTaken;
+    }
+
+    public boolean isFrameOver() {
+        return frameOver;
+    }
+
+    public void setFrameOver(boolean frameOver) {
+        this.frameOver = frameOver;
     }
 
     @Override

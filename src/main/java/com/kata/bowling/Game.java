@@ -37,24 +37,24 @@ public class Game {
         
         //add the score to the frame
         //TODO encapsulate this check inside frame
-        if (!frame.firstThrowTaken) {
+        if (!frame.isFirstThrowTaken()) {
             frame.setFirstThrow(scoreOfCurrentThrow);
-            frame.firstThrowTaken = true;
+            frame.setFirstThrowTaken(true);
 
             //detect if its a strike
             if (scoreOfCurrentThrow == 10) {
-                frame.frameOver = true;
+                frame.setFrameOver(true);
             }
 
         } else  {
             frame.setSecondThrow(scoreOfCurrentThrow);
-            frame.frameOver = true;
+            frame.setFrameOver(true);
         }
         
         //detect if the frame is over (could be on the first throw if its a strike)
-        if (frame.frameOver)   {
+        if (frame.isFrameOver()) {
 
-            if (frame.getScore() == 10 && frame.secondThrow == 0) {
+            if (frame.getScore() == 10 && frame.getSecondThrow() == 0) {
                 frame.setStrikeScored(true);
                 score = score + frame.getScore();
             } else if (frame.getScore() == 10) {
