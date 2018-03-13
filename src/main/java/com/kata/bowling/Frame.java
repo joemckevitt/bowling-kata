@@ -5,7 +5,6 @@ public class Frame {
     private int frameSequence;
     private int firstThrow;
     int secondThrow;
-    int score;
     public boolean firstThrowTaken;
     public boolean frameOver;
     private boolean strikeScored;
@@ -59,7 +58,6 @@ public class Frame {
                 "frameSequence=" + frameSequence +
                 ", firstThrow=" + firstThrow +
                 ", secondThrow=" + secondThrow +
-                ", score=" + score +
                 ", firstThrowTaken=" + firstThrowTaken +
                 ", frameOver=" + frameOver +
                 ", strikeScored=" + strikeScored +
