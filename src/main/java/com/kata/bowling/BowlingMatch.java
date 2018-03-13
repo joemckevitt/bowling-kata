@@ -26,6 +26,8 @@ package com.kata.bowling;
 
 class BowlingMatch {
 
+    private Game game = new Game();
+
     private int currentScore = 0;
     private int numberOfThrowsPerFrame = 0;
     private int numberOfFrames = 0;
@@ -40,7 +42,10 @@ class BowlingMatch {
         System.out.println("No of pins rolled over in this roll " + latestThrow);
 
         numberOfThrowsPerFrame++;
+        //take a throw (internally increment throw per frame count
+        boolean endOfFrame = game.roll(latestThrow);
 
+        //if (endOfFrame) {
         if (isEndOfFrame(latestThrow, numberOfThrowsPerFrame)) {
             endOfFrameWork(latestThrow);
         } else {
