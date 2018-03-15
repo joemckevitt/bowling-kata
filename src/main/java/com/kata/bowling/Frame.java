@@ -2,18 +2,63 @@ package com.kata.bowling;
 
 public class Frame {
 
+    public static final int ALL_PINS = 10;
+
     private int frameSequence;
+
     private int firstThrow;
     private int secondThrow;
     private boolean firstThrowTaken;
-    private boolean frameOver;
+
     private boolean strikeScored;
     private boolean spareScored;
 
     Frame(int frameSequence) {
         this.frameSequence = frameSequence;
         firstThrowTaken = false;
-        frameOver = false;
+    }
+
+    public boolean roll(int currentThrow) {
+
+        if (firstThrowOfFrame()) {
+            return doFirstThrowWork(currentThrow);
+        } else {
+            return doSecondThrowWork(currentThrow);
+        }
+
+    }
+
+    private boolean doSecondThrowWork(int currentThrow) {
+        setSecondThrow(currentThrow);
+        if (spareScored(getScore())) {
+            spareScored = true;
+        }
+        return true;
+    }
+
+    private boolean spareScored(int score) {
+        return score == ALL_PINS;
+    }
+
+    private boolean doFirstThrowWork(int currentThrow) {
+        setFirstThrow(currentThrow);
+        setFirstThrowTaken(true);
+
+        //detect if its a strike
+        if (isStrike(currentThrow)) {
+            strikeScored = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isStrike(int currentThrow) {
+        return spareScored(currentThrow);
+    }
+
+    private boolean firstThrowOfFrame() {
+        return !firstThrowTaken;
     }
 
     public int getFirstThrow() {
@@ -21,6 +66,7 @@ public class Frame {
     }
 
     public void setFirstThrow(int firstThrow) {
+        System.out.println("First throw taken of " + firstThrow + " from frame " + frameSequence);
         this.firstThrow = firstThrow;
     }
 
@@ -29,6 +75,7 @@ public class Frame {
     }
 
     public void setSecondThrow(int secondThrow) {
+        System.out.println("Second throw taken of " + secondThrow + " from frame " + frameSequence);
         this.secondThrow = secondThrow;
     }
 
@@ -40,32 +87,12 @@ public class Frame {
         return strikeScored;
     }
 
-    public void setStrikeScored(boolean strikeScored) {
-        this.strikeScored = strikeScored;
-    }
-
     public boolean isSpareScored() {
         return spareScored;
     }
 
-    public void setSpareScored(boolean spareScored) {
-        this.spareScored = spareScored;
-    }
-
-    public boolean isFirstThrowTaken() {
-        return firstThrowTaken;
-    }
-
-    public void setFirstThrowTaken(boolean firstThrowTaken) {
+    private void setFirstThrowTaken(boolean firstThrowTaken) {
         this.firstThrowTaken = firstThrowTaken;
-    }
-
-    public boolean isFrameOver() {
-        return frameOver;
-    }
-
-    public void setFrameOver(boolean frameOver) {
-        this.frameOver = frameOver;
     }
 
     @Override
@@ -75,7 +102,6 @@ public class Frame {
                 ", firstThrow=" + firstThrow +
                 ", secondThrow=" + secondThrow +
                 ", firstThrowTaken=" + firstThrowTaken +
-                ", frameOver=" + frameOver +
                 ", strikeScored=" + strikeScored +
                 ", spareScored=" + spareScored +
                 '}';

@@ -11,14 +11,14 @@ public class Game {
     private boolean endOfFrame;
 
     Game() {
-        
+
         frames = new ArrayList<Frame>(10);
         for (int i = 1; i < 11; i++) {
-            frames.add(new Frame(i));      
+            frames.add(new Frame(i));
         }
 
         score = 0;
-        currentFrameCursor = 1;//first frame of new game
+        currentFrameCursor = 0;//first frame of new game
         endOfFrame = false;
         //i think at some point, i'll probably need a endOfGame flag
     }
@@ -31,38 +31,22 @@ public class Game {
      * @return returns true if its the end of frame
      */
     public boolean roll(int scoreOfCurrentThrow) {
-        
+
         //grab the current frame
         Frame frame = frames.get(currentFrameCursor);
-        
+
         //add the score to the frame
-        //TODO encapsulate this check inside frame
-        if (!frame.isFirstThrowTaken()) {
-            frame.setFirstThrow(scoreOfCurrentThrow);
-            frame.setFirstThrowTaken(true);
+        boolean frameOver = frame.roll(scoreOfCurrentThrow);
 
-            //detect if its a strike
-            if (scoreOfCurrentThrow == 10) {
-                frame.setFrameOver(true);
-            }
-
-        } else  {
-            frame.setSecondThrow(scoreOfCurrentThrow);
-            frame.setFrameOver(true);
-        }
-        
         //detect if the frame is over (could be on the first throw if its a strike)
-        if (frame.isFrameOver()) {
+        if (frameOver) {
 
-            if (frame.getScore() == 10 && frame.getSecondThrow() == 0) {
-                frame.setStrikeScored(true);
-                score = score + frame.getScore();
-            } else if (frame.getScore() == 10) {
-                frame.setSpareScored(true);
+            if (frame.isStrikeScored() || frame.isSpareScored()) {
                 score = score + frame.getScore();
             } else {
+                //TODO next to refactor and clean up
                 //check if previous frame was a spare
-                if (currentFrameCursor > 1) {
+                if (currentFrameCursor > 0) {
                     Frame previousFrame = frames.get(currentFrameCursor - 1);
                     if (previousFrame.isSpareScored()) {
                         //last frame scored a spare
@@ -83,7 +67,7 @@ public class Game {
             //update the pointer to the next frame and return true
             currentFrameCursor++;
             return true;
-        } else  {
+        } else {
             //score = score + frame.getScore();
             return false;
         }
