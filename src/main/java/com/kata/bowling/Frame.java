@@ -17,6 +17,12 @@ public class Frame {
         this.frameSequence = frameSequence;
     }
 
+    /**
+     * roll
+     *
+     * @param noOfPinsKnockedDown Number of pins knocked down
+     * @return turn if current frame has ended
+     */
     public boolean roll(int noOfPinsKnockedDown) {
 
         if (firstThrowOfFrame()) {
