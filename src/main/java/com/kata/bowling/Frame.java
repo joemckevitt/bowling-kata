@@ -15,7 +15,6 @@ public class Frame {
 
     Frame(int frameSequence) {
         this.frameSequence = frameSequence;
-        firstThrowTaken = false;
     }
 
     public boolean roll(int noOfPinsKnockedDown) {
