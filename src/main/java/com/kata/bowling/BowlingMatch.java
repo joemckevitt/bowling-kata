@@ -6,7 +6,6 @@ class BowlingMatch {
 
     private int currentScore = 0;
     private int numberOfFrames = 0;
-    private int lastRoll = 0;
 
     public void roll(int latestThrow) {
 
@@ -19,13 +18,9 @@ class BowlingMatch {
 
         if (endOfFrame) {
             currentScore = game.getScore();
-        } else {
-            //cache last throw
-            lastRoll = latestThrow;
         }
 
         System.out.println("-----score updated ----");
-        System.out.println("Last throw " + lastRoll);
         System.out.println("Current Score " + currentScore);
         System.out.println("No. of frames " + numberOfFrames);
         System.out.println("-----------------------");

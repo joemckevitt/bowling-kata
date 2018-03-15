@@ -2,7 +2,7 @@ package com.kata.bowling;
 
 public class Frame {
 
-    public static final int ALL_PINS = 10;
+    private static final int ALL_PINS = 10;
 
     private int frameSequence;
 
@@ -65,7 +65,7 @@ public class Frame {
         return firstThrow;
     }
 
-    public void setFirstThrow(int firstThrow) {
+    private void setFirstThrow(int firstThrow) {
         System.out.println("First throw taken of " + firstThrow + " from frame " + frameSequence);
         this.firstThrow = firstThrow;
     }
@@ -74,8 +74,9 @@ public class Frame {
         return secondThrow;
     }
 
-    public void setSecondThrow(int secondThrow) {
-        System.out.println("Second throw taken of " + secondThrow + " from frame " + frameSequence);
+    private void setSecondThrow(int secondThrow) {
+        System.out.println("Second throw taken of " + secondThrow + " from frame " + frameSequence +
+                "  - first throw of " + firstThrow);
         this.secondThrow = secondThrow;
     }
 
