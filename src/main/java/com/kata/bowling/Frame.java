@@ -18,12 +18,12 @@ public class Frame {
         firstThrowTaken = false;
     }
 
-    public boolean roll(int currentThrow) {
+    public boolean roll(int noOfPinsKnockedDown) {
 
         if (firstThrowOfFrame()) {
-            return doFirstThrowWork(currentThrow);
+            return doFirstThrowWork(noOfPinsKnockedDown);
         } else {
-            return doSecondThrowWork(currentThrow);
+            return doSecondThrowWork(noOfPinsKnockedDown);
         }
 
     }

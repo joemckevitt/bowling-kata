@@ -27,16 +27,16 @@ public class Game {
     /**
      * adds the latest score to the current frame and updates running total
      *
-     * @param scoreOfCurrentThrow score of latest throw
+     * @param noOfPinsKnockedDown score of latest throw
      * @return returns true if its the end of frame
      */
-    public boolean roll(int scoreOfCurrentThrow) {
+    public boolean roll(int noOfPinsKnockedDown) {
 
         //grab the current frame
         Frame frame = frames.get(currentFrameCursor);
 
         //add the score to the frame
-        boolean frameOver = frame.roll(scoreOfCurrentThrow);
+        boolean frameOver = frame.roll(noOfPinsKnockedDown);
 
         //detect if the frame is over (could be on the first throw if its a strike)
         if (frameOver) {
