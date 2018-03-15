@@ -13,7 +13,6 @@ class BowlingMatch {
         System.out.println("Score before throw " + currentScore);
         System.out.println("No of pins rolled over in this roll " + noOfPinsKnockedDown);
 
-        //take a throw (internally increment throw per frame count
         boolean endOfFrame = game.roll(noOfPinsKnockedDown);
 
         if (endOfFrame) {
