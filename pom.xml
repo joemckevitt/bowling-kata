@@ -15,8 +15,17 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <properties>
+    <sonar.organization>joemckevitt-github</sonar.organization>
+<sonar.login>6547a29eb9de5602e2ad00d9044aad63f8c8fb5f</sonar.login>                      
+<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+</properties>
     <build>
         <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+        </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
