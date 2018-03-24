@@ -7,7 +7,6 @@ public class Game {
 
     private static final int NO_OF_FRAMES = 10;
     private List<Frame> frames;
-    private int score = 0;
     private int currentFrameCursor = 0;
 
     Game() {

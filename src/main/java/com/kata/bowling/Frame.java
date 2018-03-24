@@ -69,11 +69,13 @@ public class Frame {
 
         setSecondThrow(currentThrow);
 
-        if (getScore() > ALL_PINS) {
+        int totalScore = firstThrow + secondThrow;
+
+        if (totalScore > ALL_PINS) {
             throw new IllegalArgumentException("invalid number of pins");
         }
 
-        if (spareScored(getScore())) {
+        if (spareScored(totalScore)) {
             spareScored = true;
         } else {
             closed = true;
@@ -119,9 +121,13 @@ public class Frame {
     }
 
     public int getScore() {
-        if (closed && (strikeScored)) {
+
+        if (!closed)
+            return 0;
+
+        if (strikeScored) {
             return firstThrow + bonusThrow1 + bonusThrow2;
-        } else if (closed && spareScored) {
+        } else if (spareScored) {
             return firstThrow + secondThrow + bonusThrow1;
         } else {
             return firstThrow + secondThrow;
