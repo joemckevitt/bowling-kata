@@ -25,7 +25,7 @@ public class Game {
      */
     public void roll(int noOfPinsKnockedDown) {
 
-        boolean frameOver = false;
+        boolean frameOver;
 
         for (int i = currentFrameCursor; i > currentFrameCursor - 3; i--) {
             if (i >= 0) {
@@ -42,31 +42,6 @@ public class Game {
             //update the pointer to the next frame
             currentFrameCursor++;
         }
-
-
-//        //check previous frame if its still active (open to listening to scores)
-//        if (currentFrameCursor != 0 && !frames.get(currentFrameCursor - 1).isClosed()) {
-//            Frame prevousFrame = frames.get(currentFrameCursor - 1);
-//            prevousFrame.addBonusScore(noOfPinsKnockedDown);
-//        }
-//
-//        if (currentFrameCursor >= 2 && !frames.get(currentFrameCursor - 2).isClosed()) {
-//            Frame prevousFrame = frames.get(currentFrameCursor - 2);
-//            prevousFrame.addBonusScore(noOfPinsKnockedDown);
-//        }
-//
-//        //grab the current frame
-//        Frame frame = frames.get(currentFrameCursor);
-//
-//        //add the score to the frame
-//        boolean frameOver = frame.roll(noOfPinsKnockedDown);
-//
-//        //detect if the frame is over (could be on the first throw if its a strike)
-//        if (frameOver) {
-//            //calculateFrameScore(frame);
-//            //update the pointer to the next frame
-//            currentFrameCursor++;
-//        }
     }
 
     public int getScore() {

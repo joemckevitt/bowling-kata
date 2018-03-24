@@ -10,15 +10,10 @@ class BowlingMatch {
     public void roll(int noOfPinsKnockedDown) {
 
         System.out.println("-----------------------");
-        System.out.println("Score before throw " + currentScore);
         System.out.println("No of pins rolled over in this roll " + noOfPinsKnockedDown);
 
         game.roll(noOfPinsKnockedDown);
 
-
-        System.out.println("-----score updated ----");
-        System.out.println("Current Score " + currentScore);
-        System.out.println("No. of frames " + numberOfFrames);
         System.out.println("-----------------------");
 
     }

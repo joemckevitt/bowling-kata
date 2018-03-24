@@ -28,7 +28,6 @@ public class Frame {
      * roll
      *
      * @param noOfPinsKnockedDown Number of pins knocked down
-     * @return turn if current frame has ended (note if a strike or spare, it will
      * return true but may still be active)
      */
     public void roll(int noOfPinsKnockedDown) {
@@ -38,8 +37,9 @@ public class Frame {
         }
 
         if (closed) {
+            //TODO horrible, tidy up
             //do nothing
-        } else if (!closed && (spareScored || strikeScored)) {
+        } else if (spareScored || strikeScored) {
             closed = addBonusScore(noOfPinsKnockedDown);
         } else if (firstThrowOfFrame()) {
             moveOnNextFrame = doFirstThrowWork(noOfPinsKnockedDown);
@@ -48,7 +48,7 @@ public class Frame {
         }
     }
 
-    public boolean addBonusScore(int bonusThrow) {
+    private boolean addBonusScore(int bonusThrow) {
 
         if (spareScored) {
             bonusThrow1 = bonusThrow;
@@ -66,28 +66,6 @@ public class Frame {
         return closed;
     }
 
-    private boolean doSecondThrowWork(int currentThrow) {
-
-        setSecondThrow(currentThrow);
-
-        int totalScore = firstThrow + secondThrow;
-
-        if (totalScore > ALL_PINS) {
-            throw new IllegalArgumentException("invalid number of pins");
-        }
-
-        if (spareScored(totalScore)) {
-            spareScored = true;
-        } else {
-            closed = true;
-        }
-        return true;
-    }
-
-    private boolean spareScored(int score) {
-        return (firstThrow != 10) && (firstThrow + secondThrow == ALL_PINS);
-    }
-
     private boolean doFirstThrowWork(int currentThrow) {
 
         setFirstThrow(currentThrow);
@@ -102,8 +80,30 @@ public class Frame {
         }
     }
 
+    private boolean doSecondThrowWork(int currentThrow) {
+
+        setSecondThrow(currentThrow);
+
+        int totalScore = firstThrow + secondThrow;
+
+        if (totalScore > ALL_PINS) {
+            throw new IllegalArgumentException("invalid number of pins");
+        }
+
+        if (spareScored()) {
+            spareScored = true;
+        } else {
+            closed = true;
+        }
+        return true;
+    }
+
     private boolean isStrike() {
         return firstThrow == ALL_PINS;
+    }
+
+    private boolean spareScored() {
+        return (firstThrow != 10) && (firstThrow + secondThrow == ALL_PINS);
     }
 
     private boolean firstThrowOfFrame() {
@@ -140,10 +140,6 @@ public class Frame {
         this.firstThrowTaken = firstThrowTaken;
     }
 
-    public boolean isClosed() {
-        return closed;
-    }
-
     public boolean isMoveOnNextFrame() {
         return moveOnNextFrame;
     }
@@ -159,6 +155,7 @@ public class Frame {
                 ", spareScored=" + spareScored +
                 ", bonusThrow1=" + bonusThrow1 +
                 ", bonusThrow2=" + bonusThrow2 +
+                ", moveOnNextFrame=" + moveOnNextFrame +
                 ", closed=" + closed +
                 '}';
     }
