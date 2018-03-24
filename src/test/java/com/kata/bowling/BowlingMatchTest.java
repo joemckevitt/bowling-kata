@@ -56,4 +56,46 @@ public class BowlingMatchTest {
         bowlingMatch.roll(2);
         assertEquals(24, bowlingMatch.score());
     }
+
+    @Test
+    public void testTwoStrikesInARowExample1() {
+        BowlingMatch bowlingMatch = new BowlingMatch();
+        bowlingMatch.roll(10);//strike
+        bowlingMatch.roll(10);//strike
+        bowlingMatch.roll(1);
+        bowlingMatch.roll(1);
+        //frame 1 -> 21, frame 2 -> 33 (12), frame 3 -> 35 (2)
+        assertEquals(35, bowlingMatch.score());
+    }
+
+    @Test
+    public void testTwoStrikesInARowExample2() {
+        BowlingMatch bowlingMatch = new BowlingMatch();
+        bowlingMatch.roll(10);//strike
+        bowlingMatch.roll(10);//strike
+        bowlingMatch.roll(2);
+        bowlingMatch.roll(3);
+        //frame 1 -> 22, frame 2 -> 37 (15), frame 3 -> 42 (5)
+        assertEquals(42, bowlingMatch.score());
+    }
+
+    //Boundary tests
+    @Test(expected = IllegalArgumentException.class)
+    public void testSingleThrowOfNegativeScore() {
+        BowlingMatch bowlingMatch = new BowlingMatch();
+        bowlingMatch.roll(-1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSingleThrowMoreThanTen() {
+        BowlingMatch bowlingMatch = new BowlingMatch();
+        bowlingMatch.roll(11);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFrameScoreGreaterThanTen() {
+        BowlingMatch bowlingMatch = new BowlingMatch();
+        bowlingMatch.roll(8);
+        bowlingMatch.roll(3);//spare
+    }
 }

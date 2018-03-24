@@ -13,11 +13,8 @@ class BowlingMatch {
         System.out.println("Score before throw " + currentScore);
         System.out.println("No of pins rolled over in this roll " + noOfPinsKnockedDown);
 
-        boolean endOfFrame = game.roll(noOfPinsKnockedDown);
+        game.roll(noOfPinsKnockedDown);
 
-        if (endOfFrame) {
-            currentScore = game.getScore();
-        }
 
         System.out.println("-----score updated ----");
         System.out.println("Current Score " + currentScore);
@@ -27,6 +24,6 @@ class BowlingMatch {
     }
 
     public int score() {
-        return currentScore;
+        return game.getScore();
     }
 }

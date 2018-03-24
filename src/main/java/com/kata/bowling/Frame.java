@@ -13,6 +13,12 @@ public class Frame {
     private boolean strikeScored;
     private boolean spareScored;
 
+    private int bonusThrow1;
+    private int bonusThrow2;
+
+
+    private boolean closed = false;
+
     Frame(int frameSequence) {
         this.frameSequence = frameSequence;
     }
@@ -21,9 +27,14 @@ public class Frame {
      * roll
      *
      * @param noOfPinsKnockedDown Number of pins knocked down
-     * @return turn if current frame has ended
+     * @return turn if current frame has ended (note if a strike or spare, it will
+     * return true but may still be active)
      */
     public boolean roll(int noOfPinsKnockedDown) {
+
+        if (noOfPinsKnockedDown < 0 || noOfPinsKnockedDown > ALL_PINS) {
+            throw new IllegalArgumentException("invalid number of pins");
+        }
 
         if (firstThrowOfFrame()) {
             return doFirstThrowWork(noOfPinsKnockedDown);
@@ -33,24 +44,54 @@ public class Frame {
 
     }
 
+    public boolean addBonusScore(int bonusThrow) {
+
+        if (closed)
+            throw new IllegalArgumentException("can not add a bonus score to a closed frame");
+
+        if (spareScored) {
+            bonusThrow1 = bonusThrow;
+            closed = true;
+        } else if (strikeScored) {
+            if (bonusThrow1 != 0) {
+                //TODO fix potential bug as the bonus thow for a strike may be 0 (a miss)
+                bonusThrow2 = bonusThrow;
+                closed = true;
+            } else {
+                //first bonus throw on strike
+                bonusThrow1 = bonusThrow;
+            }
+        }
+        return closed;
+    }
+
     private boolean doSecondThrowWork(int currentThrow) {
+
         setSecondThrow(currentThrow);
+
+        if (getScore() > ALL_PINS) {
+            throw new IllegalArgumentException("invalid number of pins");
+        }
+
         if (spareScored(getScore())) {
             spareScored = true;
+        } else {
+            closed = true;
         }
         return true;
     }
 
     private boolean spareScored(int score) {
-        return score == ALL_PINS;
+        return (firstThrow != 10) && (firstThrow + secondThrow == ALL_PINS);
     }
 
     private boolean doFirstThrowWork(int currentThrow) {
+
         setFirstThrow(currentThrow);
         setFirstThrowTaken(true);
 
         //detect if its a strike
-        if (isStrike(currentThrow)) {
+        if (isStrike()) {
             strikeScored = true;
             return true;
         } else {
@@ -58,25 +99,17 @@ public class Frame {
         }
     }
 
-    private boolean isStrike(int currentThrow) {
-        return spareScored(currentThrow);
+    private boolean isStrike() {
+        return firstThrow == ALL_PINS;
     }
 
     private boolean firstThrowOfFrame() {
         return !firstThrowTaken;
     }
 
-    public int getFirstThrow() {
-        return firstThrow;
-    }
-
     private void setFirstThrow(int firstThrow) {
         System.out.println("First throw taken of " + firstThrow + " from frame " + frameSequence);
         this.firstThrow = firstThrow;
-    }
-
-    public int getSecondThrow() {
-        return secondThrow;
     }
 
     private void setSecondThrow(int secondThrow) {
@@ -86,19 +119,22 @@ public class Frame {
     }
 
     public int getScore() {
-        return firstThrow + secondThrow;
-    }
+        if (closed && (strikeScored)) {
+            return firstThrow + bonusThrow1 + bonusThrow2;
+        } else if (closed && spareScored) {
+            return firstThrow + secondThrow + bonusThrow1;
+        } else {
+            return firstThrow + secondThrow;
+        }
 
-    public boolean isStrikeScored() {
-        return strikeScored;
-    }
-
-    public boolean isSpareScored() {
-        return spareScored;
     }
 
     private void setFirstThrowTaken(boolean firstThrowTaken) {
         this.firstThrowTaken = firstThrowTaken;
+    }
+
+    public boolean isClosed() {
+        return closed;
     }
 
     @Override
@@ -110,6 +146,9 @@ public class Frame {
                 ", firstThrowTaken=" + firstThrowTaken +
                 ", strikeScored=" + strikeScored +
                 ", spareScored=" + spareScored +
+                ", bonusThrow1=" + bonusThrow1 +
+                ", bonusThrow2=" + bonusThrow2 +
+                ", closed=" + closed +
                 '}';
     }
 }
