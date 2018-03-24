@@ -16,6 +16,7 @@ public class Frame {
     private int bonusThrow1;
     private int bonusThrow2;
 
+    private boolean moveOnNextFrame;
 
     private boolean closed = false;
 
@@ -30,24 +31,24 @@ public class Frame {
      * @return turn if current frame has ended (note if a strike or spare, it will
      * return true but may still be active)
      */
-    public boolean roll(int noOfPinsKnockedDown) {
+    public void roll(int noOfPinsKnockedDown) {
 
         if (noOfPinsKnockedDown < 0 || noOfPinsKnockedDown > ALL_PINS) {
             throw new IllegalArgumentException("invalid number of pins");
         }
 
-        if (firstThrowOfFrame()) {
-            return doFirstThrowWork(noOfPinsKnockedDown);
+        if (closed) {
+            //do nothing
+        } else if (!closed && (spareScored || strikeScored)) {
+            closed = addBonusScore(noOfPinsKnockedDown);
+        } else if (firstThrowOfFrame()) {
+            moveOnNextFrame = doFirstThrowWork(noOfPinsKnockedDown);
         } else {
-            return doSecondThrowWork(noOfPinsKnockedDown);
+            moveOnNextFrame = doSecondThrowWork(noOfPinsKnockedDown);
         }
-
     }
 
     public boolean addBonusScore(int bonusThrow) {
-
-        if (closed)
-            throw new IllegalArgumentException("can not add a bonus score to a closed frame");
 
         if (spareScored) {
             bonusThrow1 = bonusThrow;
@@ -141,6 +142,10 @@ public class Frame {
 
     public boolean isClosed() {
         return closed;
+    }
+
+    public boolean isMoveOnNextFrame() {
+        return moveOnNextFrame;
     }
 
     @Override
