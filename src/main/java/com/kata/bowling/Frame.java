@@ -28,7 +28,6 @@ public class Frame {
      * roll
      *
      * @param noOfPinsKnockedDown Number of pins knocked down
-     * return true but may still be active)
      */
     public void roll(int noOfPinsKnockedDown) {
 
@@ -69,7 +68,7 @@ public class Frame {
     private boolean doFirstThrowWork(int currentThrow) {
 
         setFirstThrow(currentThrow);
-        setFirstThrowTaken(true);
+        firstThrowTaken = true;
 
         //detect if its a strike
         if (isStrike()) {
@@ -134,10 +133,6 @@ public class Frame {
             return firstThrow + secondThrow;
         }
 
-    }
-
-    private void setFirstThrowTaken(boolean firstThrowTaken) {
-        this.firstThrowTaken = firstThrowTaken;
     }
 
     public boolean isMoveOnNextFrame() {
