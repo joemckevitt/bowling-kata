@@ -4,9 +4,6 @@ class BowlingMatch {
 
     private Game game = new Game();
 
-    private int currentScore = 0;
-    private int numberOfFrames = 0;
-
     public void roll(int noOfPinsKnockedDown) {
 
         System.out.println("-----------------------");
