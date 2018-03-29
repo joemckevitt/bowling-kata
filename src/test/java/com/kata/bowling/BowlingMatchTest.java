@@ -79,6 +79,63 @@ public class BowlingMatchTest {
         assertEquals(42, bowlingMatch.score());
     }
 
+    @Test
+    public void testGutter() {
+        BowlingMatch bowlingMatch = new BowlingMatch();
+        bowlingMatch.roll(0);
+        assertEquals(0, bowlingMatch.score());
+    }
+
+    @Test
+    public void testGutter2BallsInARow() {
+        BowlingMatch bowlingMatch = new BowlingMatch();
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        assertEquals(0, bowlingMatch.score());
+    }
+
+    @Test
+    public void testGutter3BallsInARow() {
+        BowlingMatch bowlingMatch = new BowlingMatch();
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        assertEquals(0, bowlingMatch.score());
+    }
+
+    @Test
+    public void testGutter4BallsInARow() {
+        BowlingMatch bowlingMatch = new BowlingMatch();
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        assertEquals(0, bowlingMatch.score());
+    }
+
+    @Test
+    public void testGutter5BallsInARow() {
+        BowlingMatch bowlingMatch = new BowlingMatch();
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        assertEquals(0, bowlingMatch.score());
+    }
+
+    @Test
+    public void testGutter6BallsInARow() {
+        BowlingMatch bowlingMatch = new BowlingMatch();
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        bowlingMatch.roll(0);
+        assertEquals(0, bowlingMatch.score());
+    }
+
     //Boundary tests
     @Test(expected = IllegalArgumentException.class)
     public void testSingleThrowOfNegativeScore() {
