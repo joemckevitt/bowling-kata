@@ -7,6 +7,10 @@
     <version>1.0-SNAPSHOT</version>
     <name>hello-app</name>
     <url>http://maven.apache.org</url>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -15,17 +19,42 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <properties>
-    <sonar.organization>joemckevitt-github</sonar.organization>
-<sonar.login>6547a29eb9de5602e2ad00d9044aad63f8c8fb5f</sonar.login>                      
-<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-</properties>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>checkstyle</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
     <build>
         <plugins>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>sonar-maven-plugin</artifactId>
-        </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>checkstyle</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <failOnViolation>true</failOnViolation>
+                            <maxAllowedViolations>74</maxAllowedViolations>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
