@@ -1,5 +1,9 @@
 # Bowling Kata
 
+Hosted on [GitHub](https://github.com/joemckevitt/bowling-kata)
+
+[![Build Status](https://travis-ci.org/joemckevitt/bowling-kata.svg?branch=master)](https://travis-ci.org/joemckevitt/bowling-kata)
+
 ## Bowling Rules
 The game consists of 10 frames. In each frame the player has two rolls to knock down 10 pins. The score for the frame is the total number of pins knocked down, plus bonuses for strikes and spares.
 
