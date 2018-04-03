@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.eclipse.che.examples</groupId>
-    <artifactId>console-java-simple</artifactId>
+    <artifactId>bowling-kata</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>hello-app</name>
@@ -32,6 +32,9 @@
                         </reports>
                     </reportSet>
                 </reportSets>
+                <configuration>
+                    <configLocation>google_checks.xml</configLocation>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>
@@ -50,7 +53,9 @@
                         </goals>
                         <configuration>
                             <failOnViolation>true</failOnViolation>
-                            <maxAllowedViolations>74</maxAllowedViolations>
+                            <configLocation>google_checks.xml</configLocation>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
                         </configuration>
                     </execution>
                 </executions>

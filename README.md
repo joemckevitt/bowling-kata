@@ -27,3 +27,12 @@ Write a class Game that has two methods
 
 ### Credit
 Inspired by [Uncle Bob](http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata)
+
+### Project quality gates
+This project uses the following code styles
+
+Google style guide:
+[https://code.google.com/p/google-styleguide/] (https://code.google.com/p/google-styleguide/)
+
+Google check style:
+[http://checkstyle.sourceforge.net/google_style.html](http://checkstyle.sourceforge.net/google_style.html)
