@@ -1,10 +1,10 @@
 package com.kata.bowling;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Unit test for bowling game
@@ -78,6 +78,78 @@ public class BowlingMatchTest {
         //frame 1 -> 22, frame 2 -> 37 (15), frame 3 -> 42 (5)
         assertEquals(42, bowlingMatch.score());
     }
+
+  @Test
+  public void testFullBowlingMatch() {
+    BowlingMatch bowlingMatch = new BowlingMatch();
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    assertEquals(30, bowlingMatch.score());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testExtraThrowAfterMatchIsOver() {
+    BowlingMatch bowlingMatch = new BowlingMatch();
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);//extra throw
+  }
 
     @Test
     public void testGutter() {

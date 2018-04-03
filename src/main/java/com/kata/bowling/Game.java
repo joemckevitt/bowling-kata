@@ -11,7 +11,7 @@ public class Game {
 
   Game() {
 
-    frames = new ArrayList<Frame>(NO_OF_FRAMES);
+    frames = new ArrayList<>(NO_OF_FRAMES);
     for (int i = 1; i <= NO_OF_FRAMES; i++) {
       frames.add(new Frame(i));
     }
@@ -27,10 +27,13 @@ public class Game {
 
     boolean frameOver;
 
+    if (currentFrameCursor == 10) {
+      throw new IllegalArgumentException();
+    }
+
     for (int i = currentFrameCursor; i > currentFrameCursor - 3; i--) {
       if (i >= 0) {
         Frame frame = frames.get(i);
-        //frame.addBonusScore(noOfPinsKnockedDown);
         frame.roll(noOfPinsKnockedDown);
       }
 
