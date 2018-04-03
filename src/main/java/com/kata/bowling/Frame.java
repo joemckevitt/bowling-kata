@@ -35,15 +35,14 @@ public class Frame {
       throw new IllegalArgumentException("invalid number of pins");
     }
 
-    if (closed) {
-      //TODO horrible, tidy up
-      //do nothing
-    } else if (spareScored || strikeScored) {
-      closed = addBonusScore(noOfPinsKnockedDown);
-    } else if (firstThrowOfFrame()) {
-      frameOver = doFirstThrowWork(noOfPinsKnockedDown);
-    } else {
-      frameOver = doSecondThrowWork(noOfPinsKnockedDown);
+    if (!closed) {
+      if (spareScored || strikeScored) {
+        closed = addBonusScore(noOfPinsKnockedDown);
+      } else if (firstThrowOfFrame()) {
+        frameOver = doFirstThrowWork(noOfPinsKnockedDown);
+      } else {
+        frameOver = doSecondThrowWork(noOfPinsKnockedDown);
+      }
     }
   }
 
