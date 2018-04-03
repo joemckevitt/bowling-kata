@@ -344,6 +344,44 @@ public class BowlingMatchTest {
     assertEquals(57, bowlingMatch.score());
   }
 
+  @Test
+  public void testStrikesLastFrameFollowedByGutterBallAndScore() {
+    BowlingMatch bowlingMatch = new BowlingMatch();
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(10); //strike last frame
+
+    bowlingMatch.roll(0); //first bonus throw a strike
+    bowlingMatch.roll(5); //first bonus throw a strike
+
+    assertEquals(42, bowlingMatch.score());
+  }
+
   public void testMaxScore() {
     BowlingMatch bowlingMatch = new BowlingMatch();
     bowlingMatch.roll(10);

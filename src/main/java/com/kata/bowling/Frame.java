@@ -14,6 +14,7 @@ public class Frame {
   private boolean spareScored;
 
   private int bonusThrow1;
+  private boolean firstBonusThrowTaken;
   private int bonusThrow2;
 
   private boolean frameOver;
@@ -50,15 +51,16 @@ public class Frame {
 
     if (spareScored) {
       bonusThrow1 = bonusThrow;
+      firstBonusThrowTaken = true;
       closed = true;
     } else if (strikeScored) {
-      if (bonusThrow1 != 0) {
-        //TODO fix potential bug as the bonus thow for a strike may be 0 (a miss)
+      if (firstBonusThrowTaken) {
         bonusThrow2 = bonusThrow;
         closed = true;
       } else {
         //first bonus throw on strike
         bonusThrow1 = bonusThrow;
+        firstBonusThrowTaken = true;
       }
     }
     return closed;
@@ -101,7 +103,7 @@ public class Frame {
   }
 
   private boolean spareScored() {
-    return (firstThrow != 10) && (firstThrow + secondThrow == ALL_PINS);
+    return (firstThrow != ALL_PINS) && (firstThrow + secondThrow == ALL_PINS);
   }
 
   private boolean firstThrowOfFrame() {
