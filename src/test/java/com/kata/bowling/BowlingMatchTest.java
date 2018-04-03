@@ -115,8 +115,8 @@ public class BowlingMatchTest {
     assertEquals(30, bowlingMatch.score());
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testExtraThrowAfterMatchIsOver() {
+  @Test
+  public void testSpareLastFrame() {
     BowlingMatch bowlingMatch = new BowlingMatch();
     bowlingMatch.roll(1);
     bowlingMatch.roll(2);
@@ -145,11 +145,206 @@ public class BowlingMatchTest {
     bowlingMatch.roll(1);
     bowlingMatch.roll(2);
 
+    bowlingMatch.roll(5);
+    bowlingMatch.roll(5);  //spare on the the last frame
+
+    bowlingMatch.roll(8);
+
+    assertEquals(45, bowlingMatch.score());
+  }
+
+  @Test
+  public void testStrikeLastFrame() {
+    BowlingMatch bowlingMatch = new BowlingMatch();
     bowlingMatch.roll(1);
     bowlingMatch.roll(2);
 
-    bowlingMatch.roll(1);//extra throw
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(10); //strike on the the last frame
+
+    bowlingMatch.roll(1);
+
+    bowlingMatch.roll(2);
+
+    assertEquals(40, bowlingMatch.score());
   }
+
+  @Test
+  public void testSpareLastFrameBonusThrowAStrike() {
+    BowlingMatch bowlingMatch = new BowlingMatch();
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(5);
+    bowlingMatch.roll(5); //spare last frame
+
+    bowlingMatch.roll(10); //bonus throw a strike
+
+    assertEquals(47, bowlingMatch.score());
+  }
+
+  @Test
+  public void testStrikeLastFrameBonusThrowASpare() {
+    BowlingMatch bowlingMatch = new BowlingMatch();
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(10); //strike last frame
+
+    bowlingMatch.roll(5);
+    bowlingMatch.roll(5); //bonus throws score a spare
+
+    assertEquals(47, bowlingMatch.score());
+  }
+
+  @Test
+  public void testStrikeLastFrameFirstBonusThrowAStrikeFollowdBy5() {
+    BowlingMatch bowlingMatch = new BowlingMatch();
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(10); //strike last frame
+
+    bowlingMatch.roll(10); //first bonus throw a strike
+    bowlingMatch.roll(5);
+
+    assertEquals(52, bowlingMatch.score());
+  }
+
+  @Test
+  public void test3StrikesLastFrame() {
+    BowlingMatch bowlingMatch = new BowlingMatch();
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(10); //strike last frame
+
+    bowlingMatch.roll(10); //first bonus throw a strike
+    bowlingMatch.roll(10); //first bonus throw a strike
+
+    assertEquals(57, bowlingMatch.score());
+  }
+
+  
 
     @Test
     public void testGutter() {
@@ -209,6 +404,43 @@ public class BowlingMatchTest {
     }
 
     //Boundary tests
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testExtraThrowAfterMatchIsOver() {
+    BowlingMatch bowlingMatch = new BowlingMatch();
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);
+    bowlingMatch.roll(2);
+
+    bowlingMatch.roll(1);//extra throw
+  }
+
     @Test(expected = IllegalArgumentException.class)
     public void testSingleThrowOfNegativeScore() {
         BowlingMatch bowlingMatch = new BowlingMatch();

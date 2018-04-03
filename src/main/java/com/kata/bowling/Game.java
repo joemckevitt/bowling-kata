@@ -25,9 +25,7 @@ public class Game {
    */
   public void roll(int noOfPinsKnockedDown) {
 
-    boolean frameOver;
-
-    if (currentFrameCursor == 10) {
+    if (currentFrameCursor == 9 && frames.get(currentFrameCursor).isClosed()) {
       throw new IllegalArgumentException();
     }
 
@@ -39,11 +37,13 @@ public class Game {
 
     }
 
-    frameOver = frames.get(currentFrameCursor).isMoveOnNextFrame();
+    boolean frameOver = frames.get(currentFrameCursor).frameOver();
 
     if (frameOver) {
-      //update the pointer to the next frame
-      currentFrameCursor++;
+      //update the pointer to the next frame, accept if its the last frame
+      if (currentFrameCursor < 9) {
+        currentFrameCursor++;
+      }
     }
   }
 

@@ -16,7 +16,7 @@ public class Frame {
   private int bonusThrow1;
   private int bonusThrow2;
 
-  private boolean moveOnNextFrame;
+  private boolean frameOver;
 
   private boolean closed = false;
 
@@ -41,9 +41,9 @@ public class Frame {
     } else if (spareScored || strikeScored) {
       closed = addBonusScore(noOfPinsKnockedDown);
     } else if (firstThrowOfFrame()) {
-      moveOnNextFrame = doFirstThrowWork(noOfPinsKnockedDown);
+      frameOver = doFirstThrowWork(noOfPinsKnockedDown);
     } else {
-      moveOnNextFrame = doSecondThrowWork(noOfPinsKnockedDown);
+      frameOver = doSecondThrowWork(noOfPinsKnockedDown);
     }
   }
 
@@ -141,8 +141,12 @@ public class Frame {
 
   }
 
-  public boolean isMoveOnNextFrame() {
-    return moveOnNextFrame;
+  public boolean frameOver() {
+    return frameOver;
+  }
+
+  public boolean isClosed() {
+    return closed;
   }
 
   @Override
@@ -164,8 +168,8 @@ public class Frame {
         + bonusThrow1
         + ", bonusThrow2="
         + bonusThrow2
-        + ", moveOnNextFrame="
-        + moveOnNextFrame
+        + ", frameOver="
+        + frameOver
         + ", closed="
         + closed
         + '}';
