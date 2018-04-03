@@ -344,7 +344,26 @@ public class BowlingMatchTest {
     assertEquals(57, bowlingMatch.score());
   }
 
-  
+  public void testMaxScore() {
+    BowlingMatch bowlingMatch = new BowlingMatch();
+    bowlingMatch.roll(10);
+    bowlingMatch.roll(10);
+    bowlingMatch.roll(10);
+    bowlingMatch.roll(10);
+    bowlingMatch.roll(10);
+
+    bowlingMatch.roll(10);
+    bowlingMatch.roll(10);
+    bowlingMatch.roll(10);
+    bowlingMatch.roll(10);
+
+    bowlingMatch.roll(10); //strike last frame
+
+    bowlingMatch.roll(10); //first bonus throw a strike
+    bowlingMatch.roll(10); //first bonus throw a strike
+
+    assertEquals(300, bowlingMatch.score());
+  }
 
     @Test
     public void testGutter() {
