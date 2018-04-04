@@ -150,6 +150,49 @@ public class Frame {
     return closed;
   }
 
+  /**
+   * print out score card for the given frame.
+   */
+  public void printScore() {
+
+    if (frameSequence == 10) {
+      System.out.println("|------|");
+      System.out.println("|--" + frameSequence + "---|");
+
+      if (strikeScored) {
+        System.out.println("|  X|" + bonusThrow1 + "|" + bonusThrow2 + "|");
+      } else if (spareScored) {
+        System.out.println("|  " + firstThrow + "|/|" + bonusThrow1 + "|");
+      } else {
+        System.out.println("|  " + firstThrow + "|" + secondThrow + "| |");
+      }
+
+      if (getScore() < 10) {
+        System.out.println("|    " + getScore() + "  |");
+      } else {
+        System.out.println("|   " + getScore() + "  |");
+      }
+      System.out.println("|-------|");
+    } else {
+      System.out.println("|-----|");
+      System.out.println("|--" + frameSequence + "--|");
+      if (strikeScored) {
+        System.out.println("|   |X|");
+      } else if (spareScored) {
+        System.out.println("|  " + firstThrow + "|/|");
+      } else {
+        System.out.println("|  " + firstThrow + "|" + secondThrow + "|");
+      }
+      if (getScore() < 10) {
+        System.out.println("|  " + getScore() + "  |");
+      } else {
+        System.out.println("|  " + getScore() + " |");
+      }
+      System.out.println("|-----|");
+    }
+
+  }
+
   @Override
   public String toString() {
     return "Frame{"

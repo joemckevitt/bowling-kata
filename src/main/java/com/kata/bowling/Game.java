@@ -57,6 +57,7 @@ public class Game {
     for (int i = 0; i < NO_OF_FRAMES; i++) {
       Frame frame = frames.get(i);
       gameScore = gameScore + frame.getScore();
+      frame.printScore();
     }
     return gameScore;
   }
