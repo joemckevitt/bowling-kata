@@ -39,5 +39,5 @@ Google check style:
 
 This project uses the following static analysis tools
 
-FindBugs
+FindBugs: 
 [http://findbugs.sourceforge.net/](http://findbugs.sourceforge.net/)
