@@ -36,3 +36,8 @@ Google style guide:
 
 Google check style:
 [http://checkstyle.sourceforge.net/google_style.html](http://checkstyle.sourceforge.net/google_style.html)
+
+This project uses the following static analysis tools
+
+FindBugs
+[http://findbugs.sourceforge.net/](http://findbugs.sourceforge.net/)
