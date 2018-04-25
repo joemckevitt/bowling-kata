@@ -6,16 +6,25 @@ import java.util.List;
 public class Game {
 
   private static final int NO_OF_FRAMES = 10;
+
+  private int scoreFromCompleteFrames;
+
   private List<Frame> frames;
   private int currentFrameCursor = 0;
 
   Game() {
+
+    scoreFromCompleteFrames = 0;
 
     frames = new ArrayList<>(NO_OF_FRAMES);
     for (int i = 1; i <= NO_OF_FRAMES; i++) {
       frames.add(new Frame(i));
     }
 
+  }
+
+  public List<Frame> getFrames() {
+    return frames;
   }
 
   /**
@@ -29,10 +38,14 @@ public class Game {
       throw new IllegalArgumentException();
     }
 
-    for (int i = currentFrameCursor; i > currentFrameCursor - 3; i--) {
+    for (int i = currentFrameCursor - 2; i <= currentFrameCursor; i++) {
       if (i >= 0) {
         Frame frame = frames.get(i);
-        frame.roll(noOfPinsKnockedDown);
+        if (!frame.isClosed()) {
+          frame.roll(noOfPinsKnockedDown, scoreFromCompleteFrames);
+          scoreFromCompleteFrames = scoreFromCompleteFrames + frame.getScore();
+        }
+
       }
 
     }
@@ -53,12 +66,13 @@ public class Game {
    * @return Return score of the game.
    */
   public int getScore() {
-    int gameScore = 0;
-    for (int i = 0; i < NO_OF_FRAMES; i++) {
+
+    for (int i = NO_OF_FRAMES - 1; i >= 0; i--) {
       Frame frame = frames.get(i);
-      gameScore = gameScore + frame.getScore();
-      frame.printScore();
+      if (frame.isClosed()) {
+        return frame.getCumlativeScore();
+      }
     }
-    return gameScore;
+    return 0;
   }
 }

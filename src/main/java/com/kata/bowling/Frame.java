@@ -4,10 +4,17 @@ public class Frame {
 
   private static final int ALL_PINS = 10;
 
+  private int cumlativeScore;
+
   private int frameSequence;
 
   private int firstThrow;
   private int secondThrow;
+
+  public int getFrameSequence() {
+    return frameSequence;
+  }
+
   private boolean firstThrowTaken;
 
   private boolean strikeScored;
@@ -21,6 +28,10 @@ public class Frame {
 
   private boolean closed = false;
 
+  public boolean isFirstThrowTaken() {
+    return firstThrowTaken;
+  }
+
   Frame(int frameSequence) {
     this.frameSequence = frameSequence;
   }
@@ -29,8 +40,9 @@ public class Frame {
    * The number of pins knocked down for a given throw.
    *
    * @param noOfPinsKnockedDown Number of pins knocked down
+   * @param scoreFromCompleteFrames Score from completed frames
    */
-  public void roll(int noOfPinsKnockedDown) {
+  public void roll(int noOfPinsKnockedDown, int scoreFromCompleteFrames) {
 
     if (noOfPinsKnockedDown < 0 || noOfPinsKnockedDown > ALL_PINS) {
       throw new IllegalArgumentException("invalid number of pins");
@@ -44,6 +56,12 @@ public class Frame {
       } else {
         frameOver = doSecondThrowWork(noOfPinsKnockedDown);
       }
+
+      //update cumlative score if frame is now closed
+      if (isClosed()) {
+        cumlativeScore = scoreFromCompleteFrames + getScore();
+      }
+
     }
   }
 
@@ -111,6 +129,7 @@ public class Frame {
   }
 
   private void setFirstThrow(int firstThrow) {
+    //TODO ditch the system outs and replace with loggers
     System.out.println("First throw taken of " + firstThrow + " from frame " + frameSequence);
     this.firstThrow = firstThrow;
   }
@@ -151,46 +170,70 @@ public class Frame {
   }
 
   /**
-   * print out score card for the given frame.
+   * Return line suitable for score card line 3.
+   * @return Return line suitable for score card line 3
    */
-  public void printScore() {
+  public String returnLine3() {
 
     if (frameSequence == 10) {
-      System.out.println("|------|");
-      System.out.println("|--" + frameSequence + "---|");
-
       if (strikeScored) {
-        System.out.println("|  X|" + bonusThrow1 + "|" + bonusThrow2 + "|");
+        if (bonusThrow1 == 10 && bonusThrow2 == 10) {
+          return " X|X|X|";
+        } else if (bonusThrow1 == 10) {
+          return " X|X|" + bonusThrow2 + "|";
+        } else {
+          return " X|" + bonusThrow1 + "|" + bonusThrow2 + "|";
+        }
       } else if (spareScored) {
-        System.out.println("|  " + firstThrow + "|/|" + bonusThrow1 + "|");
+        return " " + firstThrow + "|/|" + bonusThrow1 + "|";
       } else {
-        System.out.println("|  " + firstThrow + "|" + secondThrow + "| |");
+        return " " + firstThrow + "|" + secondThrow + "|0|";
       }
-
-      if (getScore() < 10) {
-        System.out.println("|    " + getScore() + "  |");
-      } else {
-        System.out.println("|   " + getScore() + "  |");
-      }
-      System.out.println("|-------|");
     } else {
-      System.out.println("|-----|");
-      System.out.println("|--" + frameSequence + "--|");
       if (strikeScored) {
-        System.out.println("|   |X|");
+        return "   |X|";
       } else if (spareScored) {
-        System.out.println("|  " + firstThrow + "|/|");
+        return "  " + firstThrow + "|/|";
       } else {
-        System.out.println("|  " + firstThrow + "|" + secondThrow + "|");
+        return "  " + firstThrow + "|" + secondThrow + "|";
       }
-      if (getScore() < 10) {
-        System.out.println("|  " + getScore() + "  |");
-      } else {
-        System.out.println("|  " + getScore() + " |");
-      }
-      System.out.println("|-----|");
     }
 
+
+  }
+
+  /**
+   * Return line suitable for score card line 4.
+   *
+   * @return Return line suitable for score card line 4
+   */
+  public String returnLine4() {
+
+    if (!isClosed()) {
+      if (frameSequence == 10) {
+        return "      |";
+      } else {
+        return "     |";
+      }
+    }
+
+    if (frameSequence == 10) {
+      if (getCumlativeScore() < 10) {
+        return "   " + getCumlativeScore() + "  |";
+      } else {
+        return "   " + getCumlativeScore() + " |";
+      }
+    } else {
+      if (getCumlativeScore() < 10) {
+        return "  " + getCumlativeScore() + "  |";
+      } else {
+        return "  " + getCumlativeScore() + " |";
+      }
+    }
+  }
+
+  public int getCumlativeScore() {
+    return cumlativeScore;
   }
 
   @Override
