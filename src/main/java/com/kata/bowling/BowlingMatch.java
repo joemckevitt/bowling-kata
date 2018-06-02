@@ -18,4 +18,8 @@ class BowlingMatch {
   public int score() {
     return game.getScore();
   }
+
+  public Scoresheet getScoreSheet() {
+    return ScoresheetPrinter.generateScoreSheet(game);
+  }
 }

@@ -7,6 +7,27 @@ import org.junit.Test;
 public class ScoresheetTest {
 
   @Test
+  public void testSingleFrameSingleThrow() {
+    //create a single game with one frame
+    Game game = new Game();
+    game.roll(3);
+    game.roll(3);
+
+    Scoresheet actualScoreSheet = ScoresheetPrinter.generateScoreSheet(game);
+
+    assertEquals("|-----|", actualScoreSheet.getLine1());
+    assertEquals("|--1--|", actualScoreSheet.getLine2());
+    assertEquals("|  3|3|", actualScoreSheet.getLine3());
+    assertEquals("|  6  |", actualScoreSheet.getLine4());
+    assertEquals("|-----|", actualScoreSheet.getLine5());
+//    "|--1--|"
+//    "| 3|3|"
+//    "| 6 |"
+//    "|-----|"
+
+  }
+
+  @Test
   public void testSingleFrame() {
     //create a single game with one frame
     Game game = new Game();

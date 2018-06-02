@@ -4,9 +4,9 @@ public class Scoresheet {
 
   private String line1 = "";
   private String line2 = "";
+  private String line3 = "";
   private String line4 = "";
   private String line5 = "";
-  private String line3 = "";
 
   public String getLine3() {
     return line3;
@@ -46,5 +46,16 @@ public class Scoresheet {
 
   public void setLine5(String s) {
     line5 = line5 + s;
+  }
+
+  @Override
+  public String toString() {
+    return "Scoresheet{"
+        + "line1='" + line1 + '\''
+        + ", line2='" + line2 + '\''
+        + ", line3='" + line3 + '\''
+        + ", line4='" + line4 + '\''
+        + ", line5='" + line5 + '\''
+        + '}';
   }
 }
